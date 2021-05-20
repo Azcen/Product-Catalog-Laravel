@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Resources;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 use App\Repositories\UserRepositoryInterface;
 
@@ -33,7 +34,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         return response()->json($this->repository->create($request), 201) ;
     }
@@ -56,7 +57,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
         return response()->json($this->repository->update($request, $id), 200) ;
     }
