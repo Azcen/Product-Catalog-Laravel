@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Resources\UserController;
+use App\Http\Controllers\Resources\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::group([
 Route::group(['middleware' => ['auth:api'],], function () {
     // Route::get('vue', 'IndexController@vue');
     Route::resource('user', UserController::class);
+    Route::resource('product', ProductController::class);
 });
 
 

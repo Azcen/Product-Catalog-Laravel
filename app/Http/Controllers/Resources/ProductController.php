@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Resources;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\ProductRequest;
 
-use App\Repositories\UserRepositoryInterface;
+use App\Repositories\ProductRepositoryInterface;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
-    /** @var UserRepositoryInterface */
+    /** @var ProductRepositoryInterface */
     private $repository;
 
-    public function __construct(UserRepositoryInterface $repository)
+    public function __construct(ProductRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -34,7 +35,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(ProductRequest $request)
     {
         return response()->json($this->repository->create($request), 201);
     }
@@ -42,7 +43,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,10 +55,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         return response()->json($this->repository->update($request, $id), 200);
     }
@@ -65,7 +66,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

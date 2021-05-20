@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Validation\Rule;
-
-class UserRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,11 +16,11 @@ class UserRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-              return $this->user()->hasPermissionTo('users.store');
+              return $this->user()->hasPermissionTo('products.store');
             case 'PUT':
-              return $this->user()->hasPermissionTo('users.update');
+              return $this->user()->hasPermissionTo('products.update');
             case 'DELETE':
-              return $this->user()->hasPermissionTo('users.destroy');
+              return $this->user()->hasPermissionTo('products.destroy');
           }
     }
 
@@ -36,21 +34,16 @@ class UserRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
               return [
-                'name' => 'required|max:191',
-                'email' => 'required|max:191|email|unique:users',
-              ];
-            case 'PUT':
-              return [
-                'name' => 'required|max:191',
-                'email' => 'required',
-              ];
-            case 'DELETE':
-              return [
+                'product_name' => 'required|string',
+                'img_url'      => 'string',
+                'quantity'     => 'required|numeric',
+                'unit_price'   => 'required',
+                'currency'     => 'required|numeric',
               ];
           }
-        return [
+          return [
             //
-        ];
+          ];
     }
 
     protected function failedAuthorization()
